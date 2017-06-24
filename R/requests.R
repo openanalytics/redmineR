@@ -19,13 +19,18 @@ redmine_request <- function(type = c("GET", "POST", "PUT", "DELETE"),
     stop("API did not return JSON", call. = FALSE)
   }
   
-  parsed <- jsonlite::fromJSON(content(res, "text"), simplifyVector = simplify)
+  resContent <- content(res, "text")
+  # hadle empty response individually
+  parsed <- if (nzchar(resContent)) {
+    jsonlite::fromJSON(resContent, simplifyVector = simplify) 
+  } else NULL
   
 #  stop_for_status(res)
   if (http_error(res)) {
     stop(
-        paste0("Redmine API request failed [", status_code(res), "]:\n - ",
-            paste(parsed$errors, collapse = "\n - ")),
+        "Redmine API request failed [", status_code(res), "]",
+        if (!is.null(parsed$errors)) paste(":\n -", 
+              paste(parsed$errors, collapse = "\n - ")),
         call. = FALSE
     )
   }
