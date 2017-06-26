@@ -1,7 +1,7 @@
 ## 
 redmine_url <- function(url = NULL) {
   
-  envUrl <- Sys.getenv("REDMINE_URL")
+  envUrl <- Sys.getenv("REDMINE_URL", "")
   if (identical(envUrl, "")) {
     if (!is.null(url)) {
       envUrl <- url
@@ -23,7 +23,7 @@ redmine_url <- function(url = NULL) {
 # access at redmineURL/my/api_key
 redmine_token <- function(token = NULL) { 
   
-  envToken <- Sys.getenv("REDMINE_TOKEN")
+  envToken <- Sys.getenv("REDMINE_TOKEN", "")
   if (identical(envToken, "")) {
     if (!is.null(token)) {
       envToken <- token   

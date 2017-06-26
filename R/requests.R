@@ -55,7 +55,7 @@ redmine_post <- function(...) {
 }
 
 print.redminer <- function(x, ...) {
-  cat("Redmine ", x$url, "\n")
+  cat("redmineR API call:", x$url, "\n")
   str(x$content)
   invisible(x)
 }
