@@ -6,12 +6,13 @@ removeNULL <- function(x) {
 
 redmine_get_all_pages <- function(endpoint, query = NULL, maxLimit = 100) {
   
+  nameEndpoint <- gsub(".*/([^/.]*).*$", "\\1", endpoint)
   limit  <- maxLimit
   offset <- 0
   pageQuery <- paste0("limit=", limit, "&offset=", offset, "&", query)
   
   res <- redmine_get(endpoint = endpoint, query = pageQuery)
-  resList <- res$content[[endpoint]]
+  resList <- res$content[[nameEndpoint]]
   
   N <- res$content$total_count
   
@@ -22,7 +23,7 @@ redmine_get_all_pages <- function(endpoint, query = NULL, maxLimit = 100) {
     for (iPage in seq_along(offsets)) {
       pageQuery <- paste0("limit=", limit, "&offset=", offsets[iPage], "&", query)
       res <- redmine_get(endpoint = endpoint, query = pageQuery)
-      resList <- c(resList, res$content[[endpoint]])
+      resList <- c(resList, res$content[[nameEndpoint]])
     }
   }
   
