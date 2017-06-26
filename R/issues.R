@@ -119,10 +119,12 @@ redmine_get_issue <- redmine_show_issue <- function(issue_id,
   # TODO: describe these in the doc
   includeChoices <- c("children", "attachments", "relations", "changesets", 
       "journals", "watchers")
-  if (include == "all")
-    include <- includeChoices
-  if (!is.null(include))
+  if (!is.null(include)) {
+    if (include == "all")
+      include <- includeChoices
     include <- match.arg(include, includeChoices, several.ok = TRUE)
+  }
+    
   
   endpoint <- paste0("issues/", issue_id, ".json")
   query <- NULL

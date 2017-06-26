@@ -4,11 +4,11 @@ redmine_list_projects <- function(include = NULL, ...) {
   
   # TODO: describe these in the doc
   includeChoices <- c("trackers", "issue_categories", "enabled_modules")
-  if (include == "all")
-    include <- includeChoices
-  if (!is.null(include))
+  if (!is.null(include)) {
+    if (include == "all")
+      include <- includeChoices
     include <- match.arg(include, includeChoices, several.ok = TRUE)
-  
+  }  
   
   extraArgs <- removeNULL(list(...))
   if (length(extraArgs) > 0) {
@@ -29,10 +29,11 @@ redmine_list_projects <- function(include = NULL, ...) {
 redmine_projects_df <- function(include = NULL) {
   
   includeChoices <- c("trackers", "issue_categories", "enabled_modules")
-  if (include == "all")
-    include <- includeChoices
-  if (!is.null(include))
+  if (!is.null(include)) {
+    if (include == "all")
+      include <- includeChoices
     include <- match.arg(include, includeChoices, several.ok = TRUE)
+  }
   
   query <- NULL
   if (length(include) > 0)
@@ -48,10 +49,11 @@ redmine_get_project <- redmine_show_project <- function(project_id, include = NU
   
   # TODO: describe these in the doc
   includeChoices <- c("trackers", "issue_categories", "enabled_modules")
-  if (include == "all")
-    include <- includeChoices
-  if (!is.null(include))
+  if (!is.null(include)) {
+    if (include == "all")
+      include <- includeChoices
     include <- match.arg(include, includeChoices, several.ok = TRUE)
+  }    
   
   endpoint <- paste0("projects/", project_id, ".json")
   query <- NULL
