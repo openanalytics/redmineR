@@ -10,25 +10,39 @@ makeUploadList <- function(files) {
   lapply(files, function(file) {
         fileToken <- redmine_upload(file)
         list(
-            "token" = fileToken,
-            "filename" = file,
-            "content_type" = mime::guess_type(file)
+            token = fileToken,
+            filename = file,
+            content_type = mime::guess_type(file)
         )}
   )
 }
 
 #' create new issue
-redmine_create_issue <- function(project_id, subject, 
-    description = NULL, files = NULL, ...) {
+redmine_create_issue <- function(project_id, subject, description = NULL, 
+    files = NULL, tracker_id = NULL, status_id = NULL, priority_id = NULL, 
+    category_id = NULL, fixed_version_id = NULL, assigned_to_id = NULL, 
+    parent_issue_id = NULL, custom_fields = NULL, watcher_user_ids = NULL, 
+    is_private = NULL, estimated_hours = NULL, ...) {
   
 #  fileTokens <- sapply(files, redmine_upload)
 #  stopifnot(length(fileTokens) == length(files))
   
   issueList <- list(
-      "project_id" = project_id,
-      "subject" = subject,
-      "description" = description,
-      "uploads" = makeUploadList(files)
+      project_id = project_id,
+      subject = subject,
+      description = description,
+      uploads = makeUploadList(files),
+      tracker_id = tracker_id,
+      status_id = status_id,
+      priority_id = priority_id,
+      category_id = category_id,
+      fixed_version_id = fixed_version_id,
+      assigned_to_id = assigned_to_id,
+      parent_issue_id = parent_issue_id,
+      custom_fields = custom_fields,
+      watcher_user_ids = watcher_user_ids,
+      is_private = is_private,
+      estimated_hours = estimated_hours 
   )
   
   # remove NULL elements
@@ -53,13 +67,13 @@ redmine_update_issue <- function(issue_id, notes = NULL, project_id = NULL,
     files = NULL, ...) {
   
   issueList <- list(
-      "notes" = notes, 
-      "project_id" = project_id, 
-      "tracker_id" = tracker_id, 
-      "status_id" = status_id, 
-      "subject" = subject, 
-      "private_notes" = private_notes, 
-      "uploads" = makeUploadList(files)
+      notes = notes, 
+      project_id = project_id, 
+      tracker_id = tracker_id, 
+      status_id = status_id, 
+      subject = subject, 
+      private_notes = private_notes, 
+      uploads = makeUploadList(files)
   )
   
   # remove NULL elements
@@ -105,6 +119,8 @@ redmine_get_issue <- redmine_show_issue <- function(issue_id,
   # TODO: describe these in the doc
   includeChoices <- c("children", "attachments", "relations", "changesets", 
       "journals", "watchers")
+  if (include == "all")
+    include <- includeChoices
   if (!is.null(include))
     include <- match.arg(include, includeChoices, several.ok = TRUE)
   
@@ -135,5 +151,45 @@ redmine_download_attachments <- function(issue_id, path = ".", mode = "wb",
     
     message("Downloaded: ", savePath)
   }
+  
+}
+
+#' @examples \donttest{
+#' redmine_list_issues(project_id = 493, issue_id="12291,12293")
+#' redmine_list_issues(assigned_to_id = 27, limit=5, offset = 200)
+#' redmine_list_issues(project_id = 493, created_on=">=2017-06-02T08:12:32Z")
+#' }
+redmine_list_issues <- function(offset = NULL, limit = NULL, sort = NULL,
+    issue_id = NULL, project_id = NULL, subproject_id = NULL, tracker_id = NULL, 
+    status_id = NULL, assigned_to_id = NULL, parent_id = NULL, ...) {
+
+  funArgs <- removeNULL(c(as.list(environment()), list(...)))
+  if (length(funArgs) > 0) {
+    query <- paste0(names(funArgs), "=", funArgs, collapse = "&")
+  } else
+    query <- NULL
+  
+  res <- redmine_get("issues", query = query)
+  res
+
+}
+
+
+## merge all pages together
+
+redmine_issues_df <- function(sort = NULL,
+    issue_id = NULL, project_id = NULL, subproject_id = NULL, tracker_id = NULL, 
+    status_id = NULL, assigned_to_id = NULL, parent_id = NULL, ...) {
+  
+  funArgs <- removeNULL(c(as.list(environment()), list(...)))
+  
+  if (length(funArgs) > 0) {
+    query <- paste0(names(funArgs), "=", funArgs, collapse = "&")
+  } else
+    query <- NULL
+  
+  issues_df <- redmine_get_all_pages(endpoint = "issues", query = query)
+  
+  issues_df
   
 }
