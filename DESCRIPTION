@@ -1,9 +1,10 @@
 Package: redmineR
 Type: Package
-Title: More about what it does (maybe more than one line)
-Version: 0.0-1
-Date: 2017-04-05
+Title: Redmine API
+Version: 0.1
+Date: 2017-06-26
 Author: Maxim Nazarov
 Maintainer: Maxim Nazarov <maxim.nazarov@openanalytics.eu>
-Description: More about what it does (maybe more than one line)
-License: Software for Internal Use at Open Analytics NV
+Description: R API client for 'Redmine' project management system.
+License: GPL-3 + file LICENSE
+RoxygenNote: 6.0.1
