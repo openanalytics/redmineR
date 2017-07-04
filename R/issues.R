@@ -179,7 +179,7 @@ redmine_list_issues <- function(offset = NULL, limit = NULL, sort = NULL,
 
 ## merge all pages together
 
-redmine_issues_df <- function(sort = NULL,
+redmine_issues <- function(sort = NULL,
     issue_id = NULL, project_id = NULL, subproject_id = NULL, tracker_id = NULL, 
     status_id = NULL, assigned_to_id = NULL, parent_id = NULL, ...) {
   

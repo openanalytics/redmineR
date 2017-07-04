@@ -71,9 +71,14 @@ print.redminer_df <- function(x, cut = 20, ...) {
 
 # instead of getIdFromName
 redmine_search_id <- function(name = NULL, endpoint = "projects", query = NULL, ...) {
+  
+  enumerations <- c("issue_priorities", "time_entry_activities", 
+      "document_categories")
+  if (endpoint %in% enumerations)
+    endpoint <- paste0("enumerations/", endpoint)
+  
   res <- redmine_get_all_pages(endpoint = endpoint, query = query)
   
-#  cName <- name
   colSearch <- if (endpoint == "issues") "subject" else "name"
   ans <- if (!is.null(name)) 
         res[grepl(name, res[[colSearch]], ignore.case = TRUE), ] else res

@@ -26,7 +26,7 @@ redmine_list_projects <- function(include = NULL, ...) {
 }
 
 
-redmine_projects_df <- function(include = NULL) {
+redmine_projects <- function(include = NULL) {
   
   includeChoices <- c("trackers", "issue_categories", "enabled_modules")
   if (!is.null(include)) {
