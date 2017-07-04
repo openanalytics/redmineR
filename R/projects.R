@@ -114,7 +114,7 @@ redmine_get_project <- redmine_show_project
 
 #' Create/update/delete project
 #' 
-#' Implement Redmine API calls to work with projects.
+#' These functions implement Redmine API calls to work with projects.
 #' @param name Project name
 #' @param identifier Project identifier (no spaces)
 #' @param description Project description
@@ -127,7 +127,7 @@ redmine_get_project <- redmine_show_project
 #' "calendar", "documents", "files", "gantt", "issue_tracking", "news", 
 #' "repository", "time_tracking", "wiki")} 
 #' @param ... Further parameters
-#' @return ID of the created project for \code{redmine_create_project}
+#' @return id of the created project for \code{redmine_create_project}
 #' @seealso \url{http://www.redmine.org/projects/redmine/wiki/Rest_Projects}
 #' @author Maxim Nazarov
 #' @examples \dontrun{

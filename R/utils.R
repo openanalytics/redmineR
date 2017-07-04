@@ -71,7 +71,9 @@ print.redminer_df <- function(x, cut = 20, ...) {
 
 
 #' Search id by name
-#'  
+#' 
+#' Search happens inside the 'subject' field for issues and 'name' for other 
+#' endpoints.
 #' @param name string to search for
 #' @param endpoint endpoint where to search ("projects", "issues", ...)
 #' @param query extra query arguments 
