@@ -1,5 +1,4 @@
 ## 
-#' do a general API request
 redmine_request <- function(type = c("GET", "POST", "PUT", "DELETE"), 
     endpoint = "issues.json", query = NULL, simplify = FALSE,
     url = redmine_url(), token = redmine_token(), ...) {

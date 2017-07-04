@@ -1,11 +1,21 @@
 ## 
 
+#' List projects
 #' 
-#' @param include 
-#' @param ... 
-#' @return 
-#' 
+#' Implements Redmine API call to list projects. Note that the output will be 
+#' limited to one page, but \code{offset} or \code{page} can be specified.
+#' @param include Which extra info to include, either NULL (no, default), "all" 
+#' or a subset of \code{c("trackers", "issue_categories", "enabled_modules")}
+#' @param ... further query arguments, such as \code{offset}, \code{limit} or 
+#' \code{page}
+#' @return a \code{redminer} object
+#' @examples \dontrun{
+#'  redmine_list_projects(include = "all")
+#'  redmine_list_projects(offset = 50)
+#'  redmine_list_projects(limit = 20, page = 3)
+#' }
 #' @author Maxim Nazarov
+#' @seealso \code{\link{redmine_projects}} to show all projects as a data frame 
 #' @export
 redmine_list_projects <- function(include = NULL, ...) {
   
@@ -33,11 +43,16 @@ redmine_list_projects <- function(include = NULL, ...) {
 }
 
 
-#' Show all projects
-#' @param include 
-#' @return 
+#' Show all projects as a data frame
 #' 
+#' @param include Which extra info to include, either NULL (no, default), "all" 
+#' or a subset of \code{c("trackers", "issue_categories", "enabled_modules")}
+#' @return a data frame
 #' @author Maxim Nazarov
+#' @examples \dontrun{
+#'  redmine_projects()
+#'  redmine_projects(include = "all")
+#' }
 #' @export
 redmine_projects <- function(include = NULL) {
   
@@ -59,11 +74,17 @@ redmine_projects <- function(include = NULL) {
 }
 
 #' Show project information
+#' 
 #' @param project_id Project ID
-#' @param include Which extra info to include, either NULL (no), "all" 
+#' @param include Which extra info to include, either NULL (no, default), "all" 
 #' or a subset of \code{c("trackers", "issue_categories", "enabled_modules")}
 #' @return Project information 
 #' @author Maxim Nazarov
+#' @seealso \code{\link{redmine_search_id}} to search for id by name
+#' @examples \dontrun{
+#'  projectId <- redmine_search_id("testProject", endpoint = "projects")
+#'  redmine_show_project(project_id = projectId, include = "all")
+#' }
 #' @export
 redmine_show_project <- function(project_id, include = NULL) {
   
@@ -92,6 +113,8 @@ redmine_show_project <- function(project_id, include = NULL) {
 redmine_get_project <- redmine_show_project
 
 #' Create/update/delete project
+#' 
+#' Implement Redmine API calls to work with projects.
 #' @param name Project name
 #' @param identifier Project identifier (no spaces)
 #' @param description Project description
@@ -105,8 +128,17 @@ redmine_get_project <- redmine_show_project
 #' "repository", "time_tracking", "wiki")} 
 #' @param ... Further parameters
 #' @return ID of the created project for \code{redmine_create_project}
-#' 
+#' @seealso \url{http://www.redmine.org/projects/redmine/wiki/Rest_Projects}
 #' @author Maxim Nazarov
+#' @examples \dontrun{
+#'   newProjectId <- redmine_create_project(name = "testProject",
+#'       identifier = "test-project", description = "project to testthings",
+#'       enabled_module_names = c("files", "issue_tracking", "repository", 
+#'           "time_tracking", "wiki"))
+#'   
+#'   redmine_update_project(newProjectId, description = "project to test things")
+#'   redmine_delete_project(newProjectId)
+#' }
 #' @export
 redmine_create_project <- function(name, identifier, description = NULL,
     homepage = NULL, is_public = TRUE, parent_id = NULL, inherit_members = TRUE,

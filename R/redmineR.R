@@ -25,7 +25,8 @@
 #' 
 #' @seealso The Redmine API is described at
 #' \url{http://www.redmine.org/projects/redmine/wiki/Rest_api}
-#' 
+#'
+#' @import httr 
 #' @docType package
 #' @name redmineR
 
