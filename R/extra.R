@@ -31,6 +31,13 @@ redmine_time_entries <- function() {
   redmine_get_all_pages("time_entries")
 }
 
+#' @rdname redmine_trackers
+#' @export
+redmine_custom_fields <- function() {
+  redmine_get_all_pages("custom_fields")
+}
+
+
 # enumerations
 
 #' @rdname redmine_trackers

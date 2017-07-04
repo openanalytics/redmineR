@@ -40,7 +40,7 @@ redmine_get_all_pages <- function(endpoint, query = NULL, maxLimit = 100) {
   res_df <- as.data.frame(do.call(rbind, vectors), stringsAsFactors = FALSE)
   
   # unlist columns that are actually atomic
-  atomicCols <- names(res_df)[vapply(res_df, function(col) all(lengths(col) == 1), logical(1))]
+  atomicCols <- names(res_df)[vapply(res_df, function(col) !is.list(col) || !is.list(unlist(col, recursive = F)), logical(1))]
   res_df[atomicCols] <- lapply(res_df[atomicCols], unlist)
 
   attr(res_df, "endpoint") <- endpoint
@@ -57,10 +57,10 @@ print.redminer_df <- function(x, cut = 20, ...) {
     x$description <- ifelse(nchar(x$description) > cut,
         paste0(substr(x$description, 1, cut), " ..."), x$description)
     
-  # process list columns
-  # TODO
+  # TODO: show list columns nicer 
   listCols <- names(x)[vapply(x, is.list, logical(1))]
 #  print.data.frame(x[, grep("\\.id$", names(x), value = TRUE, invert = TRUE)])
+
   cat("redmineR listing",
       if (!is.null(attr(x, "endpoint"))) paste0(" for '", attr(x, "endpoint"), "'"), 
       if (!is.null(attr(x, "query"))) paste0(" [query = ", attr(x, "query"), "]"),

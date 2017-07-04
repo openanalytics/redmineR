@@ -5,6 +5,7 @@
 \alias{redmine_issue_statuses}
 \alias{redmine_users}
 \alias{redmine_time_entries}
+\alias{redmine_custom_fields}
 \alias{redmine_issue_priorities}
 \alias{redmine_time_entry_activities}
 \alias{redmine_document_categories}
@@ -17,6 +18,8 @@ redmine_issue_statuses()
 redmine_users()
 
 redmine_time_entries()
+
+redmine_custom_fields()
 
 redmine_issue_priorities()
 

@@ -1,6 +1,6 @@
 Package: redmineR
 Type: Package
-Title: R client for Redmine API
+Title: R Client for Redmine API
 Version: 0.1
 Date: 2017-06-26
 Author: Maxim Nazarov

@@ -3,6 +3,7 @@
 export(redmine_add_watcher)
 export(redmine_create_issue)
 export(redmine_create_project)
+export(redmine_custom_fields)
 export(redmine_delete_issue)
 export(redmine_delete_project)
 export(redmine_delete_watcher)

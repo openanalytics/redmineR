@@ -32,7 +32,7 @@ makeUploadList <- function(files) {
 #' @param fixed_version_id Target Version id
 #' @param assigned_to_id User id to assign to
 #' @param parent_issue_id Parent issue id
-#' @param custom_fields Custom fields
+#' @param custom_fields Custom fields, as list, see examples
 #' @param watcher_user_ids User id(s) to add as watchers
 #' @param is_private Whether the issue is private
 #' @param estimated_hours Estimated number of hours
@@ -41,16 +41,28 @@ makeUploadList <- function(files) {
 #' @seealso \url{http://www.redmine.org/projects/redmine/wiki/Rest_Issues}
 #' @author Maxim Nazarov
 #' @examples \dontrun{
-#'   projectID <- redmine_search_id("testProject", 
-#'       endpoint = "projects")
-#'   urgentID <- redmine_search_id("Urgent", 
-#'       endpoint = "issue_priorities")
-#'   issueID <- redmine_create_issue(
-#'       project_id = projectID, 
-#'       subject = "Urgent task", 
-#'       description = "Do it quick!", 
-#'       priority_id = urgentID,
-#'       files = "details.txt")
+#' # first get necessary ids
+#' projectID <- redmine_search_id("testProject", 
+#'     endpoint = "projects")
+#' 
+#' urgentID <- redmine_search_id("Urgent", 
+#'     endpoint = "issue_priorities")
+#' 
+#' # now create issue
+#' issueID <- redmine_create_issue(
+#'     project_id = projectID, 
+#'     subject = "Urgent task", 
+#'     description = "Do it quick!", 
+#'     priority_id = urgentID,
+#'     files = "details.txt")
+#' 
+#' # modify using custom fields
+#' redmine_update_issue(issueID, 
+#'     custom_fields = list(
+#'         list(id = 1, name = "myField", value = 100),
+#'         list(id = 2, name = "myField2", value = 200)
+#'     )
+#' )   
 #' }
 #' @export
 redmine_create_issue <- function(project_id, subject, description = NULL, 
