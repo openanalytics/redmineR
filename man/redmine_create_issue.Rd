@@ -52,6 +52,10 @@ redmine_delete_issue(issue_id)
 \item{...}{Further parameters}
 
 \item{issue_id}{Issue id}
+
+\item{notes}{Notes (comments) to add}
+
+\item{private_notes}{Private notes to add}
 }
 \value{
 id of the created issue for \code{redmine_create_issue}

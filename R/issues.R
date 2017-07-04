@@ -5,6 +5,7 @@ redmine_upload <- function(filepath, ...) {
   uploadRes$content$upload$token
 } 
 
+#' @importFrom mime guess_type
 makeUploadList <- function(files) {
   
   lapply(files, function(file) {
@@ -93,7 +94,9 @@ redmine_create_issue <- function(project_id, subject, description = NULL,
   issueRes$content$issue$id
 }
 
-#' @param issue_id Issue id 
+#' @param issue_id Issue id
+#' @param notes Notes (comments) to add
+#' @param private_notes Private notes to add 
 #' @rdname redmine_create_issue
 #' @export
 redmine_update_issue <- function(issue_id, notes = NULL, project_id = NULL,

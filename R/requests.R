@@ -1,4 +1,5 @@
 ## 
+#' @importFrom jsonlite fromJSON
 redmine_request <- function(type = c("GET", "POST", "PUT", "DELETE"), 
     endpoint = "issues.json", query = NULL, simplify = FALSE,
     url = redmine_url(), token = redmine_token(), ...) {
@@ -53,6 +54,7 @@ redmine_post <- function(...) {
   redmine_request("POST", ...)
 }
 
+#' @importFrom utils str
 print.redminer <- function(x, ...) {
   cat("redmineR API call:", x$url, "\n")
   str(x$content)

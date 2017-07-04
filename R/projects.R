@@ -139,6 +139,7 @@ redmine_get_project <- redmine_show_project
 #'   redmine_update_project(newProjectId, description = "project to test things")
 #'   redmine_delete_project(newProjectId)
 #' }
+#' @importFrom utils modifyList
 #' @export
 redmine_create_project <- function(name, identifier, description = NULL,
     homepage = NULL, is_public = TRUE, parent_id = NULL, inherit_members = TRUE,
