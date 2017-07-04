@@ -78,7 +78,7 @@ redmine_projects <- function(include = NULL) {
 #' @param project_id Project ID
 #' @param include Which extra info to include, either NULL (no, default), "all" 
 #' or a subset of \code{c("trackers", "issue_categories", "enabled_modules")}
-#' @return Project information 
+#' @return a \code{redminer} object with project information 
 #' @author Maxim Nazarov
 #' @seealso \code{\link{redmine_search_id}} to search for id by name
 #' @examples \dontrun{

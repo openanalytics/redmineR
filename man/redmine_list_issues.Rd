@@ -32,6 +32,9 @@ redmine_list_issues(offset = NULL, limit = NULL, sort = NULL,
 
 \item{...}{Further arguments}
 }
+\value{
+a \code{redminer} object
+}
 \description{
 Implements Redmine API call to list issues. Note that the output will be 
 limited to one page, but \code{offset} or \code{page} can be specified.

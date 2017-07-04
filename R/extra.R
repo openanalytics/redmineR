@@ -5,7 +5,9 @@
 #' Convenience functions to list endpoints, in particular to get ids to be 
 #' used in creating/updating or listing issues or projects.
 #' @return a data frame
-#' @author Maxim Nazarov
+#' @seealso \code{\link{redmine_search_id}} to search id by name
+#' @seealso \code{\link{redmine_issues}}, \code{\link{redmine_projects}} to 
+#' show info on issues and projects
 #' @export
 redmine_trackers <- function() {
   redmine_get_all_pages("trackers")

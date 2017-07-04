@@ -25,7 +25,7 @@ redmine_issues(sort = NULL, issue_id = NULL, project_id = NULL,
 
 \item{parent_id}{Parent issue id}
 
-\item{...}{}
+\item{...}{Further arguments}
 }
 \value{
 a data frame

@@ -16,7 +16,7 @@ redmine_get_project(project_id, include = NULL)
 or a subset of \code{c("trackers", "issue_categories", "enabled_modules")}}
 }
 \value{
-Project information
+a \code{redminer} object with project information
 }
 \description{
 Show project information

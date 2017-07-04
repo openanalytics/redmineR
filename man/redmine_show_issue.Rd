@@ -16,6 +16,9 @@ redmine_get_issue(issue_id, include = NULL)
 or a subset of \code{c("children", "attachments", "relations", "changesets", 
       "journals", "watchers")}}
 }
+\value{
+a \code{redminer} object with issue information
+}
 \description{
 Show issue information
 }

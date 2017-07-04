@@ -176,6 +176,7 @@ redmine_delete_watcher <- function(issue_id, user_id) {
 #' @param include Which extra info to include, either NULL (no, default), "all" 
 #' or a subset of \code{c("children", "attachments", "relations", "changesets", 
 #'       "journals", "watchers")}
+#' @return a \code{redminer} object with issue information
 #' @author Maxim Nazarov
 #' @seealso \code{\link{redmine_search_id}} to search for id by subject
 #' @examples \dontrun{
@@ -248,7 +249,7 @@ redmine_download_attachments <- function(issue_id, path = ".") {
 #' @param assigned_to_id user id issues are assigned to
 #' @param parent_id Parent issue id
 #' @param ... Further arguments
-#' @return 
+#' @return a \code{redminer} object
 #' @examples \dontrun{
 #'  redmine_list_issues(project_id = 1, issue_id="123,124")
 #'  redmine_list_issues(assigned_to_id = 27, limit = 5, offset = 200)
@@ -278,7 +279,6 @@ redmine_list_issues <- function(offset = NULL, limit = NULL, sort = NULL,
 #' Show all issues as a data frame
 #' 
 #' @inheritParams redmine_list_issues
-#' @param ... 
 #' @return a data frame 
 #' @author Maxim Nazarov
 #' @examples \dontrun{

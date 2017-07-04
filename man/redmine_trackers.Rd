@@ -31,6 +31,9 @@ a data frame
 Convenience functions to list endpoints, in particular to get ids to be 
 used in creating/updating or listing issues or projects.
 }
-\author{
-Maxim Nazarov
+\seealso{
+\code{\link{redmine_search_id}} to search id by name
+
+\code{\link{redmine_issues}}, \code{\link{redmine_projects}} to 
+show info on issues and projects
 }
