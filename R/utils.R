@@ -69,8 +69,18 @@ print.redminer_df <- function(x, cut = 20, ...) {
   print.data.frame(x)
 }
 
-# instead of getIdFromName
-redmine_search_id <- function(name = NULL, endpoint = "projects", query = NULL, ...) {
+
+#' Search id by name
+#'  
+#' @param name string to search for
+#' @param endpoint endpoint where to search ("projects", "issues", ...)
+#' @param query extra query arguments 
+#' @return id(s) found invisibly, in addition summary of search results is 
+#' printed 
+#' 
+#' @author Maxim Nazarov
+#' @export
+redmine_search_id <- function(name = NULL, endpoint = "projects", query = NULL) {
   
   enumerations <- c("issue_priorities", "time_entry_activities", 
       "document_categories")

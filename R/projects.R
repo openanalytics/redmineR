@@ -1,5 +1,12 @@
 ## 
 
+#' 
+#' @param include 
+#' @param ... 
+#' @return 
+#' 
+#' @author Maxim Nazarov
+#' @export
 redmine_list_projects <- function(include = NULL, ...) {
   
   # TODO: describe these in the doc
@@ -26,6 +33,12 @@ redmine_list_projects <- function(include = NULL, ...) {
 }
 
 
+#' Show all projects
+#' @param include 
+#' @return 
+#' 
+#' @author Maxim Nazarov
+#' @export
 redmine_projects <- function(include = NULL) {
   
   includeChoices <- c("trackers", "issue_categories", "enabled_modules")
@@ -45,7 +58,14 @@ redmine_projects <- function(include = NULL) {
   
 }
 
-redmine_get_project <- redmine_show_project <- function(project_id, include = NULL) {
+#' Show project information
+#' @param project_id Project ID
+#' @param include Which extra info to include, either NULL (no), "all" 
+#' or a subset of \code{c("trackers", "issue_categories", "enabled_modules")}
+#' @return Project information 
+#' @author Maxim Nazarov
+#' @export
+redmine_show_project <- function(project_id, include = NULL) {
   
   # TODO: describe these in the doc
   includeChoices <- c("trackers", "issue_categories", "enabled_modules")
@@ -67,6 +87,27 @@ redmine_get_project <- redmine_show_project <- function(project_id, include = NU
   
 }
 
+#' @export
+#' @rdname redmine_show_project
+redmine_get_project <- redmine_show_project
+
+#' Create/update/delete project
+#' @param name Project name
+#' @param identifier Project identifier (no spaces)
+#' @param description Project description
+#' @param homepage Project homepage
+#' @param is_public Whether project should be made public (TRUE by default)
+#' @param parent_id Project's parent id
+#' @param inherit_members Whether to inherit members from parent
+#' @param tracker_ids Trackers id's 
+#' @param enabled_module_names Enabled modules, a subset of \code{c("boards", 
+#' "calendar", "documents", "files", "gantt", "issue_tracking", "news", 
+#' "repository", "time_tracking", "wiki")} 
+#' @param ... Further parameters
+#' @return ID of the created project for \code{redmine_create_project}
+#' 
+#' @author Maxim Nazarov
+#' @export
 redmine_create_project <- function(name, identifier, description = NULL,
     homepage = NULL, is_public = TRUE, parent_id = NULL, inherit_members = TRUE,
     tracker_ids = NULL, enabled_module_names = c("boards", "calendar", 
@@ -101,6 +142,9 @@ redmine_create_project <- function(name, identifier, description = NULL,
   
 }
 
+#' @param project_id Project id 
+#' @rdname redmine_create_project
+#' @export
 redmine_update_project <- function(project_id, name = NULL, identifier = NULL, 
     description = NULL, homepage = NULL, is_public = NULL, parent_id = NULL, 
     inherit_members = NULL, tracker_ids = NULL, enabled_module_names = NULL, 
@@ -140,6 +184,9 @@ redmine_update_project <- function(project_id, name = NULL, identifier = NULL,
   
 }
 
+#' @rdname redmine_create_project
+#' @seealso \code{\link{redmine_search_id}} to search id by name
+#' @export
 redmine_delete_project <- function(project_id) {
   res <- redmine_request("DELETE", paste0("projects/", project_id, ".json"))
   invisible(res)
