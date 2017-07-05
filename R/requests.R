@@ -21,7 +21,7 @@ redmine_request <- function(type = c("GET", "POST", "PUT", "DELETE"),
   
   resContent <- content(res, "text")
   # hadle empty response individually
-  parsed <- if (nzchar(resContent)) {
+  parsed <- if (nzchar(trimws(resContent))) {
     jsonlite::fromJSON(resContent, simplifyVector = simplify) 
   } else NULL
   
