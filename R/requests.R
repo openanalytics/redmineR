@@ -55,6 +55,7 @@ redmine_post <- function(...) {
 }
 
 #' @importFrom utils str
+#' @export
 print.redminer <- function(x, ...) {
   cat("redmineR API call:", x$url, "\n")
   str(x$content)

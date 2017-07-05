@@ -4,13 +4,13 @@
 #' 
 #' @details The package provides:
 #' \itemize{
-#'  \item API functions that follow API description from 
-#' \url{http://www.redmine.org/projects/redmine/wiki/Rest_api}:
-#'  \item convenience functions that wrap around API functions for some useful 
-#' tasks:
+#'  \item API functions that follow API description, such as
+#'    \code{\link{redmine_create_issue}}, \code{\link{redmine_update_project}}, ... 
+#'  \item convenience functions that wrap around API functions for some useful
+#'    tasks, such as \code{\link{redmine_search_id}}, \code{\link{redmine_issues}}, ...
 #' }
-#' Requests are performed using \code{httr} package, and if they fail, HTTP 
-#' errors are reported.
+#' Full list of available functions can be accessed by running 
+#' \code{help(package = "redmineR")}.
 #' 
 #' @section Authentication:
 #' Authentication is performed using API key, which can be obtained by accessing 
@@ -23,7 +23,8 @@
 #' first \code{redmineR} request (this would be saved for the current session 
 #' only). 
 #' 
-#' @seealso The Redmine API is described at
+#' @section API Description:
+#' The Redmine API is described at
 #' \url{http://www.redmine.org/projects/redmine/wiki/Rest_api}
 #'
 #' @import httr 
