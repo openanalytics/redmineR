@@ -2,3 +2,5 @@
 ^\.settings$
 ^\.gitignore$
 R/dev.R
+^README\.Rmd$
+^README-.*\.png$
