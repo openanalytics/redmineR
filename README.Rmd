@@ -34,6 +34,18 @@ library(redmineR)
 ?redmineR
 ```
 
+## Authentication
+
+Authentication is performed using API key, which can be obtained by accessing
+`[redmine_server_URL]/my/account`. Note that REST API should be enabled by
+the server administrator. 
+
+The easiest way to provide the API key to `redmineR` is to define environment
+variables `REDMINE_URL` and `REDMINE_TOKEN` inside your `.Renviron` file. If
+these variables are not defined, you will be prompted to enter url/token with
+the first `redmineR` request (this would be saved for the current session
+only). 
+
 ## Example
 
 You can quickly get a working Redmine demo environment to try `redmineR`

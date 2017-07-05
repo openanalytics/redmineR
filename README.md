@@ -21,6 +21,13 @@ library(redmineR)
 ?redmineR
 ```
 
+Authentication
+--------------
+
+Authentication is performed using API key, which can be obtained by accessing `[redmine_server_URL]/my/account`. Note that REST API should be enabled by the server administrator.
+
+The easiest way to provide the API key to `redmineR` is to define environment variables `REDMINE_URL` and `REDMINE_TOKEN` inside your `.Renviron` file. If these variables are not defined, you will be prompted to enter url/token with the first `redmineR` request (this would be saved for the current session only).
+
 Example
 -------
 
@@ -43,9 +50,11 @@ Sys.setenv("REDMINE_TOKEN" = "b91fe6803b09b27b068ee02157db2a8100d52f81")
 
 ``` r
 redmine_projects()
+#> redmineR listing for 'projects':
 #> data frame with 0 columns and 0 rows
 
 redmine_users()
+#> redmineR listing for 'users':
 #>   id          login firstname lastname             mail
 #> 1  2 redmineR-admin   Redmine    Admin demo@example.net
 #>             created_on        last_login_on
@@ -59,7 +68,7 @@ redmine_users()
     identifier = "test-project", description = "project to testthings",
     enabled_module_names = c("files", "issue_tracking", "repository", 
         "time_tracking", "wiki")))
-#> [1] 8
+#> [1] 10
 
 # trivial update
 redmine_update_project(newProjectId, description = "project to test things")
@@ -69,10 +78,11 @@ redmine_update_project(newProjectId, description = "project to test things")
 
 ``` r
 redmine_projects()
-#>   id        name   identifier            description status
-#> 1  8 testProject test-project project to test things      1
+#> redmineR listing for 'projects':
+#>   id        name   identifier              description status
+#> 1 10 testProject test-project project to test thin ...      1
 #>             created_on           updated_on
-#> 1 2017-07-05T01:14:55Z 2017-07-05T01:14:56Z
+#> 1 2017-07-05T01:27:15Z 2017-07-05T01:27:15Z
 ```
 
 or:
@@ -83,13 +93,13 @@ redmine_list_projects()
 #> List of 4
 #>  $ projects   :List of 1
 #>   ..$ :List of 7
-#>   .. ..$ id         : int 8
+#>   .. ..$ id         : int 10
 #>   .. ..$ name       : chr "testProject"
 #>   .. ..$ identifier : chr "test-project"
 #>   .. ..$ description: chr "project to test things"
 #>   .. ..$ status     : int 1
-#>   .. ..$ created_on : chr "2017-07-05T01:14:55Z"
-#>   .. ..$ updated_on : chr "2017-07-05T01:14:56Z"
+#>   .. ..$ created_on : chr "2017-07-05T01:27:15Z"
+#>   .. ..$ updated_on : chr "2017-07-05T01:27:15Z"
 #>  $ total_count: int 1
 #>  $ offset     : int 0
 #>  $ limit      : int 25
@@ -102,9 +112,9 @@ projectID <- redmine_search_id("testProject",
     endpoint = "projects")
 #> redmineR listing for 'projects':
 #>   id        name   identifier              description status
-#> 1  8 testProject test-project project to test thin ...      1
+#> 1 10 testProject test-project project to test thin ...      1
 #>             created_on           updated_on
-#> 1 2017-07-05T01:14:55Z 2017-07-05T01:14:56Z
+#> 1 2017-07-05T01:27:15Z 2017-07-05T01:27:15Z
 
 # now create issue
 issueID <- redmine_create_issue(
@@ -118,12 +128,12 @@ issueID <- redmine_create_issue(
 
 ``` r
 redmine_show_issue(issueID, include = "all")
-#> redmineR API call: http://rredmine.m.redmine.org/issues/5.json?include=children,attachments,relations,changesets,journals,watchers 
+#> redmineR API call: http://rredmine.m.redmine.org/issues/7.json?include=children,attachments,relations,changesets,journals,watchers 
 #> List of 1
 #>  $ issue:List of 17
-#>   ..$ id         : int 5
+#>   ..$ id         : int 7
 #>   ..$ project    :List of 2
-#>   .. ..$ id  : int 8
+#>   .. ..$ id  : int 10
 #>   .. ..$ name: chr "testProject"
 #>   ..$ tracker    :List of 2
 #>   .. ..$ id  : int 1
@@ -142,8 +152,8 @@ redmine_show_issue(issueID, include = "all")
 #>   ..$ start_date : chr "2017-07-05"
 #>   ..$ done_ratio : int 0
 #>   ..$ spent_hours: num 0
-#>   ..$ created_on : chr "2017-07-05T01:14:56Z"
-#>   ..$ updated_on : chr "2017-07-05T01:14:56Z"
+#>   ..$ created_on : chr "2017-07-05T01:27:15Z"
+#>   ..$ updated_on : chr "2017-07-05T01:27:15Z"
 #>   ..$ attachments: list()
 #>   ..$ changesets : list()
 #>   ..$ journals   : list()
