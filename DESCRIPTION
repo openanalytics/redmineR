@@ -2,7 +2,7 @@ Package: redmineR
 Type: Package
 Title: R Client for Redmine API
 Version: 0.1
-Date: 2017-06-26
+Date: 2017-07-05
 Author: Maxim Nazarov
 Maintainer: Maxim Nazarov <maxim.nazarov@openanalytics.eu>
 Description: R API client for the 'Redmine' project management system.
