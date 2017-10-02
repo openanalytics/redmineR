@@ -263,6 +263,7 @@ redmine_download_attachments <- function(issue_id, path = ".") {
 #' @param status_id Status id
 #' @param assigned_to_id user id issues are assigned to
 #' @param parent_id Parent issue id
+#' @param query_id Custom query id
 #' @param ... Further arguments
 #' @return a \code{redminer} object
 #' @examples \dontrun{
@@ -275,7 +276,7 @@ redmine_download_attachments <- function(issue_id, path = ".") {
 #' @export
 redmine_list_issues <- function(offset = NULL, limit = NULL, sort = NULL,
     issue_id = NULL, project_id = NULL, subproject_id = NULL, tracker_id = NULL, 
-    status_id = NULL, assigned_to_id = NULL, parent_id = NULL, ...) {
+    status_id = NULL, assigned_to_id = NULL, parent_id = NULL, query_id, ...) {
 
   funArgs <- removeNULL(c(as.list(environment()), list(...)))
   if (length(funArgs) > 0) {
@@ -304,7 +305,7 @@ redmine_list_issues <- function(offset = NULL, limit = NULL, sort = NULL,
 #' @export
 redmine_issues <- function(sort = NULL,
     issue_id = NULL, project_id = NULL, subproject_id = NULL, tracker_id = NULL, 
-    status_id = NULL, assigned_to_id = NULL, parent_id = NULL, ...) {
+    status_id = NULL, assigned_to_id = NULL, parent_id = NULL, query_id, ...) {
   
   funArgs <- removeNULL(c(as.list(environment()), list(...)))
   

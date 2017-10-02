@@ -7,11 +7,11 @@ redmineR
 Installation
 ------------
 
-To install the package from GitHub, you can use devtools:
+To install the package from GitHub, you can use package `remotes` (or `devtools`):
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("openanalytics/redmineR")
+# install.packages("remotes")
+remotes::install_github("openanalytics/redmineR")
 ```
 
 To get a quick package overview, run:
@@ -51,14 +51,19 @@ Sys.setenv("REDMINE_TOKEN" = "b91fe6803b09b27b068ee02157db2a8100d52f81")
 ``` r
 redmine_projects()
 #> redmineR listing for 'projects':
-#> data frame with 0 columns and 0 rows
+#>   id           name      identifier description status
+#> 1 12 testProject455 test-project455        toto      1
+#>             created_on           updated_on
+#> 1 2017-08-24T19:17:36Z 2017-08-24T19:18:54Z
 
 redmine_users()
 #> redmineR listing for 'users':
-#>   id          login firstname lastname             mail
-#> 1  2 redmineR-admin   Redmine    Admin demo@example.net
+#>   id          login firstname  lastname             mail
+#> 1  2 redmineR-admin   Redmine     Admin demo@example.net
+#> 2  4         tester    Tester Testering   fake@email.com
 #>             created_on        last_login_on
 #> 1 2017-07-04T23:43:05Z 2017-07-04T23:43:34Z
+#> 2 2017-10-02T14:58:04Z 2017-10-02T14:58:28Z
 ```
 
 ### Create a new project
@@ -68,7 +73,7 @@ redmine_users()
     identifier = "test-project", description = "project to testthings",
     enabled_module_names = c("files", "issue_tracking", "repository", 
         "time_tracking", "wiki")))
-#> [1] 10
+#> [1] 15
 
 # trivial update
 redmine_update_project(newProjectId, description = "project to test things")
@@ -79,10 +84,12 @@ redmine_update_project(newProjectId, description = "project to test things")
 ``` r
 redmine_projects()
 #> redmineR listing for 'projects':
-#>   id        name   identifier              description status
-#> 1 10 testProject test-project project to test thin ...      1
+#>   id           name      identifier              description status
+#> 1 15    testProject    test-project project to test thin ...      1
+#> 2 12 testProject455 test-project455                     toto      1
 #>             created_on           updated_on
-#> 1 2017-07-05T01:27:15Z 2017-07-05T01:27:15Z
+#> 1 2017-10-02T15:26:12Z 2017-10-02T15:26:12Z
+#> 2 2017-08-24T19:17:36Z 2017-08-24T19:18:54Z
 ```
 
 or:
@@ -91,16 +98,24 @@ or:
 redmine_list_projects()
 #> redmineR API call: http://rredmine.m.redmine.org/projects.json 
 #> List of 4
-#>  $ projects   :List of 1
+#>  $ projects   :List of 2
 #>   ..$ :List of 7
-#>   .. ..$ id         : int 10
+#>   .. ..$ id         : int 15
 #>   .. ..$ name       : chr "testProject"
 #>   .. ..$ identifier : chr "test-project"
 #>   .. ..$ description: chr "project to test things"
 #>   .. ..$ status     : int 1
-#>   .. ..$ created_on : chr "2017-07-05T01:27:15Z"
-#>   .. ..$ updated_on : chr "2017-07-05T01:27:15Z"
-#>  $ total_count: int 1
+#>   .. ..$ created_on : chr "2017-10-02T15:26:12Z"
+#>   .. ..$ updated_on : chr "2017-10-02T15:26:12Z"
+#>   ..$ :List of 7
+#>   .. ..$ id         : int 12
+#>   .. ..$ name       : chr "testProject455"
+#>   .. ..$ identifier : chr "test-project455"
+#>   .. ..$ description: chr "toto"
+#>   .. ..$ status     : int 1
+#>   .. ..$ created_on : chr "2017-08-24T19:17:36Z"
+#>   .. ..$ updated_on : chr "2017-08-24T19:18:54Z"
+#>  $ total_count: int 2
 #>  $ offset     : int 0
 #>  $ limit      : int 25
 ```
@@ -109,12 +124,14 @@ redmine_list_projects()
 
 ``` r
 projectID <- redmine_search_id("testProject", 
-    endpoint = "projects")
+    endpoint = "projects")[1]
 #> redmineR listing for 'projects':
-#>   id        name   identifier              description status
-#> 1 10 testProject test-project project to test thin ...      1
+#>   id           name      identifier              description status
+#> 1 15    testProject    test-project project to test thin ...      1
+#> 2 12 testProject455 test-project455                     toto      1
 #>             created_on           updated_on
-#> 1 2017-07-05T01:27:15Z 2017-07-05T01:27:15Z
+#> 1 2017-10-02T15:26:12Z 2017-10-02T15:26:12Z
+#> 2 2017-08-24T19:17:36Z 2017-08-24T19:18:54Z
 
 # now create issue
 issueID <- redmine_create_issue(
@@ -128,12 +145,12 @@ issueID <- redmine_create_issue(
 
 ``` r
 redmine_show_issue(issueID, include = "all")
-#> redmineR API call: http://rredmine.m.redmine.org/issues/7.json?include=children,attachments,relations,changesets,journals,watchers 
+#> redmineR API call: http://rredmine.m.redmine.org/issues/9.json?include=children,attachments,relations,changesets,journals,watchers 
 #> List of 1
 #>  $ issue:List of 17
-#>   ..$ id         : int 7
+#>   ..$ id         : int 9
 #>   ..$ project    :List of 2
-#>   .. ..$ id  : int 10
+#>   .. ..$ id  : int 15
 #>   .. ..$ name: chr "testProject"
 #>   ..$ tracker    :List of 2
 #>   .. ..$ id  : int 1
@@ -149,20 +166,51 @@ redmine_show_issue(issueID, include = "all")
 #>   .. ..$ name: chr "Redmine Admin"
 #>   ..$ subject    : chr "test task"
 #>   ..$ description: chr "test description"
-#>   ..$ start_date : chr "2017-07-05"
+#>   ..$ start_date : chr "2017-10-02"
 #>   ..$ done_ratio : int 0
 #>   ..$ spent_hours: num 0
-#>   ..$ created_on : chr "2017-07-05T01:27:15Z"
-#>   ..$ updated_on : chr "2017-07-05T01:27:15Z"
+#>   ..$ created_on : chr "2017-10-02T15:26:13Z"
+#>   ..$ updated_on : chr "2017-10-02T15:26:13Z"
 #>   ..$ attachments: list()
 #>   ..$ changesets : list()
 #>   ..$ journals   : list()
 #>   ..$ watchers   : list()
 ```
 
+### Use custom queries
+
+Using custom search queries is a powerful feature of redmine. It is not currently possible to create new queries with Rest API, but it is possible to list them and use when searching for issues, as demonstrated below.
+
+We have created a new user and a custom query for them that would list all "Bugs" that are not "Closed".
+
+``` r
+# change user account
+Sys.setenv("REDMINE_TOKEN" = "6d6af23f4089fe902d875a5521ffae17d756d1a1")
+
+# list existing queries (`name` can also be specified for further filtering),
+# and save ID of the first one
+queryId <- redmine_search_id(endpoint = "queries")[1] 
+#> redmineR listing for 'queries':
+#>   id     name
+#> 1  1 openBUGS
+
+# now list issues following this query call.
+redmine_issues(query_id = queryId)
+#> redmineR listing for 'issues' [query = query_id=1]:
+#>   id         project tracker status  priority           author   subject
+#> 1  9 15, testProject  1, Bug 1, New 2, Normal 2, Redmine Admin test task
+#>        description start_date done_ratio           created_on
+#> 1 test description 2017-10-02          0 2017-10-02T15:26:13Z
+#>             updated_on
+#> 1 2017-10-02T15:26:13Z
+```
+
 ### Clean up
 
 ``` r
+# need to have admin rights
+Sys.setenv("REDMINE_TOKEN" = "b91fe6803b09b27b068ee02157db2a8100d52f81")
+
 redmine_delete_issue(issueID)
 redmine_delete_project(projectID)
 ```

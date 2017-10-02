@@ -21,11 +21,12 @@ management system.
 
 ## Installation
 
-To install the package from GitHub, you can use devtools:
+To install the package from GitHub, you can use package `remotes` (or
+`devtools`):
 
 ```{r, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("openanalytics/redmineR")
+# install.packages("remotes")
+remotes::install_github("openanalytics/redmineR")
 ```
 
 To get a quick package overview, run:
@@ -103,7 +104,7 @@ redmine_list_projects()
 ### Create an issue
 ```{r issue}
 projectID <- redmine_search_id("testProject", 
-    endpoint = "projects")
+    endpoint = "projects")[1]
 
 # now create issue
 issueID <- redmine_create_issue(
@@ -118,8 +119,34 @@ issueID <- redmine_create_issue(
 redmine_show_issue(issueID, include = "all")
 ```
 
+### Use custom queries
+
+Using custom search queries is a powerful feature of redmine. It is not
+currently possible to create new queries with Rest API, but it is possible to
+list them and use when searching for issues, as demonstrated below.
+
+We have created a new user and a custom query for them that would list all
+"Bugs" that are not "Closed".
+
+
+```{r queries}
+# change user account
+Sys.setenv("REDMINE_TOKEN" = "6d6af23f4089fe902d875a5521ffae17d756d1a1")
+
+# list existing queries (`name` can also be specified for further filtering),
+# and save ID of the first one
+queryId <- redmine_search_id(endpoint = "queries")[1] 
+
+# now list issues following this query call.
+redmine_issues(query_id = queryId)
+```
+
 ### Clean up
 ```{r clean}
+# need to have admin rights
+Sys.setenv("REDMINE_TOKEN" = "b91fe6803b09b27b068ee02157db2a8100d52f81")
+
 redmine_delete_issue(issueID)
 redmine_delete_project(projectID)
 ```
+

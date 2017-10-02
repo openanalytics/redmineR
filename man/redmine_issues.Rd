@@ -6,7 +6,7 @@
 \usage{
 redmine_issues(sort = NULL, issue_id = NULL, project_id = NULL,
   subproject_id = NULL, tracker_id = NULL, status_id = NULL,
-  assigned_to_id = NULL, parent_id = NULL, ...)
+  assigned_to_id = NULL, parent_id = NULL, query_id, ...)
 }
 \arguments{
 \item{sort}{Sorting columns}
@@ -24,6 +24,8 @@ redmine_issues(sort = NULL, issue_id = NULL, project_id = NULL,
 \item{assigned_to_id}{user id issues are assigned to}
 
 \item{parent_id}{Parent issue id}
+
+\item{query_id}{Custom query id}
 
 \item{...}{Further arguments}
 }
