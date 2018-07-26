@@ -1,3 +1,6 @@
+0.2.0 (2018-07-26)
+  o added "time_entry_activities" to redmine_list_projects
+  o fix requests when redmine URL is in subfolder and not on domain's top level  
 0.1.1 (2017-10-02)
   o document usage of custom queries
 0.1 (2017-07-05)

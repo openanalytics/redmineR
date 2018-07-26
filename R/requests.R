@@ -10,6 +10,10 @@ redmine_request <- function(type = c("GET", "POST", "PUT", "DELETE"),
   if (!grepl("\\.json$", endpoint))
     endpoint <- paste0(endpoint, ".json")
   
+  # if url contains path, do not overwrite it
+  if (!is.null(urlPath <- parse_url(url)$path))
+    endpoint <- c(urlPath, endpoint)
+  
   fullpath <- modify_url(url = url, path = endpoint, query = query)
   
   res <- VERB(type, url = fullpath, add_headers("X-Redmine-API-Key" = token), 
