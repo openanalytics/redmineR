@@ -230,9 +230,10 @@ redmine_get_issue <- redmine_show_issue
 #'  
 #' @param issue_id Issue id 
 #' @param path Path to save files to
+#' @param overwrite Whether to overwrite existing files
 #' @author Maxim Nazarov
 #' @export
-redmine_download_attachments <- function(issue_id, path = ".") {
+redmine_download_attachments <- function(issue_id, path = ".", overwrite = FALSE) {
   
   issue <- redmine_get_issue(issue_id, include = "attachments")
   attachments <- issue$content$issue$attachments
@@ -242,7 +243,7 @@ redmine_download_attachments <- function(issue_id, path = ".") {
     
     res <- GET(url = attachment$content_url, 
         add_headers("X-Redmine-API-Key" = redmine_token()),
-        write_disk(savePath))
+        write_disk(savePath, overwrite = overwrite))
     
     message("Downloaded: ", savePath)
   }

@@ -8,7 +8,8 @@ redmine_list_projects(include = NULL, ...)
 }
 \arguments{
 \item{include}{Which extra info to include, either NULL (no, default), "all" 
-or a subset of \code{c("trackers", "issue_categories", "enabled_modules")}}
+or a subset of \code{c("trackers", "issue_categories", "enabled_modules",
+"time_entry_activities")}}
 
 \item{...}{further query arguments, such as \code{offset}, \code{limit} or 
 \code{page}}

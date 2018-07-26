@@ -5,7 +5,8 @@
 #' Implements Redmine API call to list projects. Note that the output will be 
 #' limited to one page, but \code{offset} or \code{page} can be specified.
 #' @param include Which extra info to include, either NULL (no, default), "all" 
-#' or a subset of \code{c("trackers", "issue_categories", "enabled_modules")}
+#' or a subset of \code{c("trackers", "issue_categories", "enabled_modules",
+#' "time_entry_activities")}
 #' @param ... further query arguments, such as \code{offset}, \code{limit} or 
 #' \code{page}
 #' @return a \code{redminer} object
@@ -20,7 +21,7 @@
 redmine_list_projects <- function(include = NULL, ...) {
   
   # TODO: describe these in the doc
-  includeChoices <- c("trackers", "issue_categories", "enabled_modules")
+  includeChoices <- c("trackers", "issue_categories", "enabled_modules", "time_entry_activities")
   if (!is.null(include)) {
     if (include == "all")
       include <- includeChoices

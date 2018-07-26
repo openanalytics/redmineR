@@ -4,12 +4,14 @@
 \alias{redmine_download_attachments}
 \title{Download attachments from an issue}
 \usage{
-redmine_download_attachments(issue_id, path = ".")
+redmine_download_attachments(issue_id, path = ".", overwrite = FALSE)
 }
 \arguments{
 \item{issue_id}{Issue id}
 
 \item{path}{Path to save files to}
+
+\item{overwrite}{Whether to overwrite existing files}
 }
 \description{
 Download attachments from an issue
