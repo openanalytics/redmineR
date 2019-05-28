@@ -3,6 +3,7 @@
 S3method(print,redminer)
 S3method(print,redminer_df)
 export(redmine_add_watcher)
+export(redmine_create_category)
 export(redmine_create_issue)
 export(redmine_create_project)
 export(redmine_custom_fields)
