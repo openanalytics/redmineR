@@ -10,8 +10,8 @@ redmine_create_project(name, identifier, description = NULL,
   homepage = NULL, is_public = TRUE, parent_id = NULL,
   inherit_members = TRUE, tracker_ids = NULL,
   enabled_module_names = c("boards", "calendar", "documents", "files",
-  "gantt", "issue_tracking", "news", "repository", "time_tracking", "wiki"),
-  ...)
+  "gantt", "issue_tracking", "news", "repository", "time_tracking",
+  "wiki"), ...)
 
 redmine_update_project(project_id, name = NULL, identifier = NULL,
   description = NULL, homepage = NULL, is_public = NULL,

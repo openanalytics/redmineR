@@ -1,7 +1,18 @@
 ---
-output:
-  md_document:
-    variant: markdown_github
+title: "Getting started with redmineR"
+author: "Maxim Nazarov, Open Analytics NV"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  html_document:
+    toc: true # table of content true
+    toc_float: true
+    toc_depth: 5  # upto three depths of headings (specified by #, ## and ###)
+    number_sections: true  ## if you want number sections at each table header
+    theme: united  # many options for theme, this one is my favorite.
+vignette: >
+  %\VignetteIndexEntry{Getting started with redmineR}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->

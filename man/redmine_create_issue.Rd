@@ -6,11 +6,12 @@
 \alias{redmine_delete_issue}
 \title{Create/update/delete issue}
 \usage{
-redmine_create_issue(project_id, subject, description = NULL, files = NULL,
-  tracker_id = NULL, status_id = NULL, priority_id = NULL,
-  category_id = NULL, fixed_version_id = NULL, assigned_to_id = NULL,
-  parent_issue_id = NULL, custom_fields = NULL, watcher_user_ids = NULL,
-  is_private = NULL, estimated_hours = NULL, ...)
+redmine_create_issue(project_id, subject, description = NULL,
+  files = NULL, tracker_id = NULL, status_id = NULL,
+  priority_id = NULL, category_id = NULL, fixed_version_id = NULL,
+  assigned_to_id = NULL, parent_issue_id = NULL,
+  custom_fields = NULL, watcher_user_ids = NULL, is_private = NULL,
+  estimated_hours = NULL, ...)
 
 redmine_update_issue(issue_id, notes = NULL, project_id = NULL,
   tracker_id = NULL, status_id = NULL, subject = NULL,
