@@ -3,19 +3,17 @@ title: "Getting started with redmineR"
 author: "Maxim Nazarov, Open Analytics NV"
 date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: 
-  html_document:
-    toc: true # table of content true
-    toc_float: true
-    toc_depth: 5  # upto three depths of headings (specified by #, ## and ###)
-    number_sections: true  ## if you want number sections at each table header
-    theme: united  # many options for theme, this one is my favorite.
+  html_vignette:
+    toc: true
+  md_document:
+    variant: gfm
 vignette: >
   %\VignetteIndexEntry{Getting started with redmineR}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md is generated from vignettes/redmineR-vignette.Rmd. Please edit that file -->
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
@@ -24,8 +22,6 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-
-# redmineR
 
 `redmineR` is an R API client for the [Redmine](http://www.redmine.org) project
 management system.
@@ -58,7 +54,7 @@ these variables are not defined, you will be prompted to enter url/token with
 the first `redmineR` request (this would be saved for the current session
 only). 
 
-## Example
+## Examples
 
 You can quickly get a working Redmine demo environment to try `redmineR`
 by filling a simple form at http://m.redmine.org.
