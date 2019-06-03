@@ -1,7 +1,7 @@
 ^\.project$
 ^\.settings$
 ^\.gitignore$
-R/dev.R
+^inst/dev*$
 ^README\.Rmd$
 ^README-.*\.png$
 ^\.git$
