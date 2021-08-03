@@ -27,8 +27,27 @@ redmine_users <- function() {
 
 #' @rdname redmine_trackers
 #' @export
-redmine_time_entries <- function() {
-  redmine_get_all_pages("time_entries")
+redmine_time_entries <- function(
+  from = NULL,
+  to   = NULL,
+  project = NULL
+) {
+  
+  if ( !is.null(from) ) {
+    from <- paste0("from=", from)
+  }
+  
+  if ( !is.null(to) ) {
+    to <- paste0("to=", to)
+  }
+  
+  if ( !is.null(project) ) {
+    project <- paste0("project=", project)
+  }
+  
+  query <- paste0(c(from, to, project), collapse = "&")
+  
+  redmine_get_all_pages("time_entries", query = query)
 }
 
 #' @rdname redmine_trackers
