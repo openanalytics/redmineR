@@ -43,6 +43,12 @@ redmine_get_all_pages <- function(endpoint, query = NULL, maxLimit = 100) {
   # atomicCols <- names(res_df)[vapply(res_df, function(col) !is.list(col) || !is.list(unlist(col, recursive = F)), logical(1))]
   # res_df[atomicCols] <- lapply(res_df[atomicCols], unlist)
 
+  getNonAtomicCols <- function(df) names(df)[!vapply(df, function(col) !is.list(col) || !is.list(unlist(col, recursive = F)), logical(1))]
+
+  res_df <- res_df %>%
+    tidyr::unnest_wider(col = all_of(getNonAtomicCols(.)), names_sep = "_") %>%
+    tidyr::unnest_wider(col = all_of(getNonAtomicCols(.)), names_sep = "_")
+
   attr(res_df, "endpoint") <- endpoint
   attr(res_df, "query") <- query
   class(res_df) <- append("redminer_df", class(res_df))

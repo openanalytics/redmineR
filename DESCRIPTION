@@ -9,7 +9,7 @@ Description: R API client for the 'Redmine' project management system.
 URL: https://github.com/openanalytics/redmineR, http://www.redmine.org/projects/redmine/wiki/Rest_api
 License: GPL-3 + file LICENSE
 RoxygenNote: 6.1.1
-Imports: httr, jsonlite, mime
+Imports: httr, jsonlite, mime, tidyr
 Suggests: knitr
 VignetteBuilder: knitr
 Encoding: UTF-8
