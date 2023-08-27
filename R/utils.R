@@ -49,6 +49,8 @@ redmine_get_all_pages <- function(endpoint, query = NULL, maxLimit = 100) {
     tidyr::unnest_wider(col = all_of(getNonAtomicCols(.)), names_sep = "_") %>%
     tidyr::unnest_wider(col = all_of(getNonAtomicCols(.)), names_sep = "_")
 
+  res_df <- as.data.frame(res_df)
+
   attr(res_df, "endpoint") <- endpoint
   attr(res_df, "query") <- query
   class(res_df) <- append("redminer_df", class(res_df))
