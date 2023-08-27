@@ -59,7 +59,7 @@ redmine_get_all_pages <- function(endpoint, query = NULL, maxLimit = 100) {
 
 #' @export
 print.redminer_df <- function(x, cut = 20, ...) {
-  if (!is.null(x$description) && is.character(x$description))
+  if ('description' %in% names(x) && !is.null(x$description) && is.character(x$description))
     x$description <- ifelse(nchar(x$description) > cut,
         paste0(substr(x$description, 1, cut), " ..."), x$description)
 
